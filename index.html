@@ -1,12 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>outbreak</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outbreak - Top-Down Zombie Shooter</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="menu-overlay" class="overlay">
+            <h1>OUTBREAK</h1>
+            <p class="subtitle">No one escapes the horde.</p>
+            <div class="diff-group">
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn active" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <button id="start-button">Start Game</button>
+            <p class="controls-hint">
+                WASD to move | Mouse to aim | Click to shoot | R to reload
+            </p>
+        </div>
+
+        <div id="hud" class="overlay hidden">
+            <div id="hud-left">
+                <div id="hp-bar-container">
+                    <div id="hp-bar"></div>
+                </div>
+                <div id="ammo-display">AMMO: <span id="ammo-count">12 / 48</span></div>
+            </div>
+            <div id="score-display">SCORE: <span id="score-count">0</span></div>
+        </div>
+
+        <div id="gameover-overlay" class="overlay hidden">
+            <h2>GAME OVER</h2>
+            <span id="new-highscore-label" class="hidden">NEW HIGH SCORE!</span>
+            <p>Score: <span id="final-score">0</span></p>
+            <p>Best: <span id="high-score">0</span></p>
+            <div class="button-row">
+                <button id="restart-button">Play Again</button>
+                <button id="menu-button" class="secondary">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
