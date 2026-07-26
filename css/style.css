@@ -1,0 +1,237 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1d2021;
+    color: #ebdbb2;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#game-container.playing {
+    cursor: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d2021;
+    z-index: 10;
+    gap: 1.5rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 10px;
+    color: #fb4934;
+    text-shadow: 0 0 20px rgba(251, 73, 52, 0.3);
+}
+
+.subtitle {
+    color: #a89984;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin-top: -0.5rem;
+}
+
+.controls-hint {
+    color: #665c54;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+.diff-group {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.diff-btn {
+    background-color: transparent;
+    color: #a89984;
+    border: 1px solid #504945;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: 1px;
+}
+
+.diff-btn:hover {
+    border-color: #fe8019;
+    color: #fe8019;
+    box-shadow: none;
+    transform: none;
+}
+
+.diff-btn.active {
+    background-color: #fe8019;
+    border-color: #fe8019;
+    color: #1d2021;
+}
+
+button {
+    background-color: #fb4934;
+    color: #1d2021;
+    border: none;
+    padding: 16px 44px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background-color: #cc241d;
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button.secondary {
+    background-color: transparent;
+    border: 2px solid #504945;
+    color: #a89984;
+}
+
+button.secondary:hover {
+    border-color: #a89984;
+    color: #ebdbb2;
+    background-color: rgba(235, 219, 178, 0.05);
+}
+
+.button-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 24px 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(29, 32, 33, 0.7), transparent);
+    pointer-events: none;
+    z-index: 5;
+    gap: 0;
+}
+
+#hud-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#hp-bar-container {
+    width: 280px;
+    height: 20px;
+    background-color: #282828;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 2px solid #504945;
+}
+
+#hp-bar {
+    width: 100%;
+    height: 100%;
+    background-color: #b8bb26;
+    transition:
+        width 0.15s ease,
+        background-color 0.3s ease;
+}
+
+#ammo-display {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #a89984;
+}
+
+#score-display {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ebdbb2;
+}
+
+h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: #fb4934;
+    text-shadow: 0 0 15px rgba(251, 73, 52, 0.25);
+}
+
+#gameover-overlay p {
+    color: #a89984;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+#gameover-overlay p span {
+    color: #ebdbb2;
+    font-weight: 800;
+}
+
+#new-highscore-label {
+    color: #fabd2f;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    animation: pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0.6;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
