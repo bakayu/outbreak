@@ -5,7 +5,7 @@ import { Pickup } from "./pickup.js";
 import { Obstacle } from "./obstacle.js";
 import { ScreenShake } from "./screenShake.js";
 import { circleCollision } from "./collision.js";
-import { loadHighScore, saveHighScore } from "./storage.js";
+import { loadHighScore, saveHighScore, saveScore } from "./storage.js";
 import { DIFFICULTY, DROP_CHANCE } from "./config.js";
 
 export class GameEngine {
@@ -112,6 +112,7 @@ export class GameEngine {
 		this.finalScore.textContent = this.score;
 		this.highScoreEl.textContent = this.highScore;
 
+		saveScore(this.score, this.difficulty);
 		if (this.score > this.highScore) {
 			this.highScore = this.score;
 			saveHighScore(this.score);
