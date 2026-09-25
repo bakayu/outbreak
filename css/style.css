@@ -235,3 +235,67 @@ h2 {
         opacity: 1;
     }
 }
+
+.menu-link {
+    display: inline-block;
+    background-color: #fb4934;
+    color: #1d2021;
+    padding: 16px 44px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.menu-link:hover {
+    background-color: #cc241d;
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+.scoreboard-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.scoreboard-panel {
+    width: min(800px, 90vw);
+    min-height: 80vh;
+    padding: 40px;
+    text-align: center;
+}
+
+.best-score {
+    margin: 30px 0;
+    color: #fabd2f;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+#score-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 30px 0;
+    padding: 0;
+    list-style-position: inside;
+}
+
+#score-list li {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 20px;
+    padding: 16px;
+    background-color: #282828;
+    color: #a89984;
+    text-align: left;
+}
+
+#score-list li.highest-score {
+    background-color: #665c00;
+    color: #fbf1c7;
+    border: 2px solid #fabd2f;
+}
