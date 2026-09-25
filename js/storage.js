@@ -31,7 +31,6 @@ export function saveScore(score, difficulty) {
 
 		const scoresUpdated = scores.slice(0, 50);
 
-		// DEBUG: check the updated scores
 		console.log(JSON.stringify(scoresUpdated));
 		localStorage.setItem(
 			SCORE_HISTORY_KEY,
