@@ -42,16 +42,43 @@ export class GameEngine {
 	buildObstacles() {
 		const w = this.mapW;
 		const h = this.mapH;
-		return [
-			new Obstacle(w * 0.1, h * 0.12, 140, 140),
-			new Obstacle(w * 0.78, h * 0.12, 140, 140),
-			new Obstacle(w * 0.1, h * 0.72, 140, 140),
-			new Obstacle(w * 0.78, h * 0.72, 140, 140),
-			new Obstacle(w * 0.35, h * 0.08, 110, 110),
-			new Obstacle(w * 0.55, h * 0.8, 110, 110),
-			new Obstacle(w * 0.2, h * 0.4, 120, 140),
-			new Obstacle(w * 0.7, h * 0.4, 120, 140),
+		const layouts = [
+			[
+				new Obstacle(w * 0.1, h * 0.12, 140, 140),
+				new Obstacle(w * 0.78, h * 0.12, 140, 140),
+				new Obstacle(w * 0.1, h * 0.72, 140, 140),
+				new Obstacle(w * 0.78, h * 0.72, 140, 140),
+				new Obstacle(w * 0.35, h * 0.08, 110, 110),
+				new Obstacle(w * 0.55, h * 0.8, 110, 110),
+				new Obstacle(w * 0.2, h * 0.4, 120, 140),
+				new Obstacle(w * 0.7, h * 0.4, 120, 140),
+			],
+			[
+				new Obstacle(w * 0.08, h * 0.12, 130, 120),
+				new Obstacle(w * 0.78, h * 0.08, 130, 120),
+				new Obstacle(w * 0.12, h * 0.72, 150, 110),
+				new Obstacle(w * 0.75, h * 0.70, 150, 120),
+				new Obstacle(w * 0.33, h * 0.24, 100, 100),
+				new Obstacle(w * 0.56, h * 0.66, 100, 100),
+				new Obstacle(w * 0.18, h * 0.42, 110, 130),
+				new Obstacle(w * 0.68, h * 0.38, 110, 130),
+
+			],
+			[
+				new Obstacle(w * 0.06, h * 0.08, 160, 100),
+				new Obstacle(w * 0.78, h * 0.16, 120, 150),
+				new Obstacle(w * 0.08, h * 0.74, 130, 110),
+				new Obstacle(w * 0.76, h * 0.72, 160, 100),
+				new Obstacle(w * 0.36, h * 0.28, 110, 90),
+				new Obstacle(w * 0.52, h * 0.61, 110, 90),
+				new Obstacle(w * 0.22, h * 0.45, 110, 120),
+				new Obstacle(w * 0.67, h * 0.43, 110, 120),
+
+			],
 		];
+
+		const randomIndex = Math.floor(Math.random() * 3);
+		return layouts[randomIndex];
 	}
 
 	initUI() {
