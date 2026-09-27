@@ -37,6 +37,24 @@
             <div id="score-display">SCORE: <span id="score-count">0</span></div>
         </div>
 
+        <div id="pause-overlay" class="pause-overlay hidden" role="dialog" aria-modal="true"
+            aria-labelledby="pause-title">
+            <section class="pause-dialog">
+                <button id="pause-close" class="pause-close" type="button" aria-label="Resume game">&times;</button>
+                <h2 id="pause-title">GAME PAUSED</h2>
+
+                <div class="pause-stats">
+                    <p>SCORE: <span id="pause-score">0</span></p>
+                    <p>DIFFICULTY: <span id="pause-difficulty">Medium</span></p>
+                    <p>HIGH SCORE: <span id="pause-high-score">0</span></p>
+                </div>
+
+                <p class="pause-tip">
+                    Press <kbd>ESC</kbd> to resume playing
+                </p>
+            </section>
+        </div>
+
         <div id="gameover-overlay" class="overlay hidden">
             <h2>GAME OVER</h2>
             <span id="new-highscore-label" class="hidden">NEW HIGH SCORE!</span>
