@@ -362,6 +362,37 @@ export class GameEngine {
 		ctx.fillStyle = "#fb4934";
 		ctx.fill();
 
+		this.drawReloadIndicator(ctx, x, y);
+
+		ctx.restore();
+	}
+
+	drawReloadIndicator(ctx, x, y) {
+		if (!this.player?.isReloading) return;
+
+		const duration = Math.max(this.player.reloadDuration, 1);
+		const remaining = Math.max(this.player.reloadTimer, 0);
+		const progress = Math.min(1, Math.max(0, 1 - remaining / duration));
+
+		ctx.save();
+
+		ctx.lineWidth = 3;
+		ctx.strokeStyle = "rgba(235, 219, 178, 0.25)";
+		ctx.beginPath();
+		ctx.arc(x, y, 24, 0, Math.PI * 2);
+		ctx.stroke();
+
+		ctx.strokeStyle = "#fabd2f";
+		ctx.beginPath();
+		ctx.arc(
+			x,
+			y,
+			24,
+			-Math.PI / 2,
+			-Math.PI / 2 + progress * Math.PI * 2,
+		);
+		ctx.stroke();
+
 		ctx.restore();
 	}
 
