@@ -327,6 +327,17 @@ h2 {
     font-size: 1.15rem;
 }
 
+.pause-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.pause-buttons button {
+    padding: 12px 22px;
+    font-size: 1rem;
+}
+
 .menu-link {
     display: inline-block;
     background-color: #fb4934;

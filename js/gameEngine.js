@@ -102,6 +102,8 @@ export class GameEngine {
 		document.getElementById("restart-button").addEventListener("click", () => this.start());
 		document.getElementById("menu-button").addEventListener("click", () => this.goToMenu());
 		document.getElementById("pause-close").addEventListener("click", () => this.resume());
+		document.getElementById("pause-restart-button").addEventListener("click", () => this.restartFromPause());
+		document.getElementById("pause-menu-button").addEventListener("click", () => this.menuFromPause());
 
 		const diffButtons = document.querySelectorAll(".diff-btn");
 		diffButtons.forEach((btn) => {
@@ -133,6 +135,7 @@ export class GameEngine {
 
 	goToMenu() {
 		this.state = "MENU";
+		this.pauseKeyHeld = false;
 		this.hudOverlay.classList.add("hidden");
 		this.pauseOverlay.classList.add("hidden");
 		this.gameoverOverlay.classList.add("hidden");
@@ -163,6 +166,20 @@ export class GameEngine {
 	togglePause() {
 		if (this.state === "PLAYING") this.pause();
 		else if (this.state === "PAUSED") this.resume();
+	}
+
+	restartFromPause() {
+		if (this.state !== "PAUSED") return;
+
+		this.gameOver();
+		this.start();
+	}
+
+	menuFromPause() {
+		if (this.state !== "PAUSED") return;
+
+		this.gameOver();
+		this.goToMenu();
 	}
 
 	gameOver() {
