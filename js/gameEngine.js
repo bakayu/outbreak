@@ -28,6 +28,7 @@ export class GameEngine {
 
 		this.lastTime = 0;
 		this.reloadKeyHeld = false;
+		this.pauseKeyHeld = false;
 
 		this.initUI();
 	}
@@ -84,11 +85,15 @@ export class GameEngine {
 	initUI() {
 		this.menuOverlay = document.getElementById("menu-overlay");
 		this.hudOverlay = document.getElementById("hud");
+		this.pauseOverlay = document.getElementById("pause-overlay");
 		this.gameoverOverlay = document.getElementById("gameover-overlay");
 
 		this.hpBar = document.getElementById("hp-bar");
 		this.ammoCount = document.getElementById("ammo-count");
 		this.scoreCount = document.getElementById("score-count");
+		this.pauseScore = document.getElementById("pause-score");
+		this.pauseDifficulty = document.getElementById("pause-difficulty");
+		this.pauseHighScore = document.getElementById("pause-high-score");
 		this.finalScore = document.getElementById("final-score");
 		this.highScoreEl = document.getElementById("high-score");
 		this.newHighScoreEl = document.getElementById("new-highscore-label");
@@ -96,6 +101,9 @@ export class GameEngine {
 		document.getElementById("start-button").addEventListener("click", () => this.start());
 		document.getElementById("restart-button").addEventListener("click", () => this.start());
 		document.getElementById("menu-button").addEventListener("click", () => this.goToMenu());
+		document.getElementById("pause-close").addEventListener("click", () => this.resume());
+		document.getElementById("pause-restart-button").addEventListener("click", () => this.restartFromPause());
+		document.getElementById("pause-menu-button").addEventListener("click", () => this.menuFromPause());
 
 		const diffButtons = document.querySelectorAll(".diff-btn");
 		diffButtons.forEach((btn) => {
@@ -115,26 +123,72 @@ export class GameEngine {
 		this.score = 0;
 		this.spawnTimer = 0;
 		this.screenShake = new ScreenShake();
+		this.pauseKeyHeld = false;
 
 		this.menuOverlay.classList.add("hidden");
+		this.pauseOverlay.classList.add("hidden");
 		this.gameoverOverlay.classList.add("hidden");
 		this.hudOverlay.classList.remove("hidden");
 		this.container.classList.add("playing");
+		this.container.classList.remove("paused");
 	}
 
 	goToMenu() {
 		this.state = "MENU";
+		this.pauseKeyHeld = false;
 		this.hudOverlay.classList.add("hidden");
+		this.pauseOverlay.classList.add("hidden");
 		this.gameoverOverlay.classList.add("hidden");
 		this.menuOverlay.classList.remove("hidden");
 		this.container.classList.remove("playing");
+		this.container.classList.remove("paused");
+	}
+
+	pause() {
+		if (this.state !== "PLAYING" || !this.player) return;
+
+		this.state = "PAUSED";
+		this.pauseScore.textContent = this.score;
+		this.pauseDifficulty.textContent = this.difficulty.label;
+		this.pauseHighScore.textContent = Math.max(this.highScore, this.score);
+		this.pauseOverlay.classList.remove("hidden");
+		this.container.classList.add("paused");
+	}
+
+	resume() {
+		if (this.state !== "PAUSED") return;
+
+		this.state = "PLAYING";
+		this.pauseOverlay.classList.add("hidden");
+		this.container.classList.remove("paused");
+	}
+
+	togglePause() {
+		if (this.state === "PLAYING") this.pause();
+		else if (this.state === "PAUSED") this.resume();
+	}
+
+	restartFromPause() {
+		if (this.state !== "PAUSED") return;
+
+		this.gameOver();
+		this.start();
+	}
+
+	menuFromPause() {
+		if (this.state !== "PAUSED") return;
+
+		this.gameOver();
+		this.goToMenu();
 	}
 
 	gameOver() {
 		this.state = "GAMEOVER";
 		this.hudOverlay.classList.add("hidden");
+		this.pauseOverlay.classList.add("hidden");
 		this.gameoverOverlay.classList.remove("hidden");
 		this.container.classList.remove("playing");
+		this.container.classList.remove("paused");
 
 		this.finalScore.textContent = this.score;
 		this.highScoreEl.textContent = this.highScore;
@@ -170,6 +224,12 @@ export class GameEngine {
 	}
 
 	update(dt) {
+		const escapeDown = this.input.isKeyDown("Escape");
+		if ((this.state === "PLAYING" || this.state === "PAUSED") && escapeDown && !this.pauseKeyHeld) {
+			this.togglePause();
+		}
+		this.pauseKeyHeld = escapeDown;
+
 		if (this.state !== "PLAYING") return;
 
 		if (this.input.isKeyDown("KeyR") && !this.reloadKeyHeld) {
@@ -285,6 +345,8 @@ export class GameEngine {
 	}
 
 	render() {
+		if (this.state === "PAUSED") return;
+
 		const ctx = this.ctx;
 		ctx.fillStyle = "#504945";
 		ctx.fillRect(0, 0, this.mapW, this.mapH);
