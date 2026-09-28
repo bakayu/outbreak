@@ -30,6 +30,15 @@ body {
     cursor: none;
 }
 
+#game-container.paused {
+    cursor: default;
+}
+
+#game-container.paused #gameCanvas {
+    filter: blur(3px);
+    transform: scale(1.01);
+}
+
 .overlay {
     position: absolute;
     top: 0;
@@ -234,6 +243,88 @@ h2 {
     to {
         opacity: 1;
     }
+}
+
+.pause-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(29, 32, 33, 0.35);
+    backdrop-filter: blur(2px);
+}
+
+.pause-dialog {
+    position: relative;
+    width: min(420px, calc(100vw - 40px));
+    padding: 42px 36px 32px;
+    background-color: rgba(29, 32, 33, 0.96);
+    border: 2px solid #504945;
+    border-radius: 8px;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.pause-dialog h2 {
+    font-size: 2.6rem;
+    letter-spacing: 5px;
+}
+
+.pause-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background-color: transparent;
+    color: #a89984;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.pause-close:hover {
+    background-color: transparent;
+    color: #fb4934;
+    transform: none;
+    box-shadow: none;
+}
+
+.pause-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 28px 0;
+    color: #a89984;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.pause-stats span {
+    color: #ebdbb2;
+}
+
+.pause-tip {
+    color: #a89984;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.pause-tip kbd {
+    padding: 2px 6px;
+    border: 1px solid #665c54;
+    border-radius: 3px;
+    color: #fbf1c7;
+    font-family: inherit;
+}
+
+.pause-tip strong {
+    color: #fb4934;
+    font-size: 1.15rem;
 }
 
 .menu-link {
